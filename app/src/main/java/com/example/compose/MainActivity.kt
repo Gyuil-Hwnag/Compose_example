@@ -1,36 +1,50 @@
 package com.example.compose
 
 import android.os.Bundle
-import android.print.PrintAttributes
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.compose.ui.*
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Greeting()
+            Column {
+                Main()
+            }
         }
     }
 
     @Preview
     @Composable
-    fun Greeting() {
-        Column {
-            Text(text = "Compose Sample1")
-            Text("Hello, World1", style = TextStyle(color = Color.Red))
+    fun Main() {
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Greeting()
+            Spacer(modifier = Modifier.height(8.dp))
+            NameString("Hwang")
+            BoxEx("Box Test")
             Row {
-                Text(text = "Compose Sample2")
-                Text("Hello, World2", style = TextStyle(color = Color.Red))
+                ImageCard(Modifier
+                    .fillMaxWidth(0.5f)
+                    .padding(16.dp))
+                ImageCard(Modifier
+                    .fillMaxWidth(1f)
+                    .padding(16.dp))
             }
+//            ListOfColumn()
+            ListOfLazyColumn()
         }
-
     }
 }
+
+
+
+
