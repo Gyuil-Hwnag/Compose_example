@@ -2,6 +2,7 @@ package com.example.compose
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
@@ -13,11 +14,11 @@ import androidx.compose.ui.unit.dp
 import com.example.compose.ui.*
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            Column() {
+            Column {
                 Main()
             }
         }

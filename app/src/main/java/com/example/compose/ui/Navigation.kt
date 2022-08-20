@@ -4,23 +4,29 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.TextUnitType.Companion.Sp
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import com.example.compose.MainViewModel
 
 
 @Composable
 fun NavigationControl() {
-    val (value, setValue) = remember {
+    // value1 & value2 & value 차이 알아두기
+    val value1: MutableState<String> = remember {
+        mutableStateOf("")
+    }
+    var value2: String by remember {
+        mutableStateOf("")
+    }
+
+    val (value: String, setValue: (String) -> Unit) = remember {
         mutableStateOf("")
     }
 
@@ -29,7 +35,7 @@ fun NavigationControl() {
         navController = navController,
         startDestination = "First"
     ) {
-        composable("First") { FirtScreen(
+        composable("First") { FirstScreen(
             toSecond = { navController.navigate("Second") },
             toThird = {
                 setValue(it)
@@ -51,12 +57,14 @@ fun NavigationControl() {
 }
 
 @Composable
-fun FirtScreen(
+fun FirstScreen(
     toSecond: () -> Unit,
     toThird: (textValue: String) -> Unit) {
-    val (value, setValue) = remember {
-        mutableStateOf("")
-    }
+    val viewModel = viewModel<MainViewModel>()
+
+    // 기존의 LiveData 사용시 (Compose는 State를 기준으로 행동함)
+    val value = viewModel.liveData.observeAsState("")
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
@@ -70,9 +78,13 @@ fun FirtScreen(
             Text(text = "Second Screen")
         }
         Spacer(modifier = Modifier.height(16.dp))
-        TextField(value = value, onValueChange = setValue)
+        TextField(
+            value = viewModel.data.value,
+            onValueChange = { text ->
+                viewModel.changeData(text)
+            })
         Button(onClick = {
-            toThird(value)
+            toThird(viewModel.data.value)
         }) {
             Text(text = "Third Screen")
         }
