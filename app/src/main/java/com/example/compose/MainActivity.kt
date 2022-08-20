@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Scaffold
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -15,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column {
+            Column() {
                 Main()
             }
         }
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
+            NavigationControl()
             Greeting()
             Spacer(modifier = Modifier.height(8.dp))
             NameString("Hwang")
@@ -41,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
 //            ListOfColumn()
             ListOfLazyColumn()
+            TextFieldString()
         }
     }
 }
