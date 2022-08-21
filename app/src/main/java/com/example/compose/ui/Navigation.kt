@@ -59,7 +59,8 @@ fun NavigationControl() {
 @Composable
 fun FirstScreen(
     toSecond: () -> Unit,
-    toThird: (textValue: String) -> Unit) {
+    toThird: (textValue: String) -> Unit
+) {
     val viewModel = viewModel<MainViewModel>()
 
     // 기존의 LiveData 사용시 (Compose는 State를 기준으로 행동함)
