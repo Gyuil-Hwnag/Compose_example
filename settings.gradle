@@ -14,4 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "compose"
 include ':app'
-include ':sample1'
+include ':bmicalculate'
+include ':stopwatcher'
