@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/bmicalculate" />
+            <option value="$PROJECT_DIR$/gallery" />
             <option value="$PROJECT_DIR$/stopwatcher" />
             <option value="$PROJECT_DIR$/webbrowser" />
           </set>
