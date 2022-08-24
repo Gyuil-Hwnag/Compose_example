@@ -16,3 +16,4 @@ rootProject.name = "compose"
 include ':app'
 include ':bmicalculate'
 include ':stopwatcher'
+include ':webbrowser'
