@@ -4,4 +4,5 @@
 3. StopWatcher (FloatingActionButton, TimerTask)
 4. WebBrowser (Composable webView, SharedFlow, LaunchedEffect)
 5. Gallery (Pager & Indicators, coil, ContentProvider)
-6. Sensor (SensorManager, Canvas)
+6. Sensor (SensorManager, Canvas, AndroidViewModel)
+7. xylophone (SoundPool, AndroidViewModel)
