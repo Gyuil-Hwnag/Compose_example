@@ -6,3 +6,4 @@
 5. Gallery (Pager & Indicators, coil, ContentProvider)
 6. Sensor (SensorManager, Canvas, AndroidViewModel)
 7. xylophone (SoundPool, AndroidViewModel)
+8. MapGPS (GoogleMap, LocationCallBack, PolylineOptions, LifecycleEventObserver)
