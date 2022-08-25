@@ -11,7 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.core.content.getSystemService
 import androidx.lifecycle.*
 
-class MainViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver, SensorEventListener {
+class MainViewModel(application: Application) : AndroidViewModel(application), LifecycleEventObserver, SensorEventListener {
 
     private val _x = mutableStateOf(0f)
     val x: State<Float> = _x
@@ -23,7 +23,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application), L
         application.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun registerSensor() {
         sensorManager.registerListener(
             this,
@@ -31,9 +30,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application), L
             SensorManager.SENSOR_DELAY_NORMAL
         )
     }
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+
     fun unregisterSensor() {
         sensorManager.unregisterListener(this)
+    }
+
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        if (event == Lifecycle.Event.ON_RESUME) {
+            registerSensor()
+        } else if (event == Lifecycle.Event.ON_PAUSE) {
+            unregisterSensor()
+        }
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
