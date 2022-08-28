@@ -1,5 +1,6 @@
 package com.example.todolist.ui.main
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -66,9 +67,7 @@ fun MainScreen(
                     )
                 }
             )
-
             Divider(modifier = Modifier.padding(8.dp))
-
             LazyColumn(
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)

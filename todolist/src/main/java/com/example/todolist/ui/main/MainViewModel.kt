@@ -1,6 +1,7 @@
 package com.example.todolist.ui.main
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
@@ -19,11 +20,21 @@ class MainViewModel(
 
     private var recentlyDeleteTodo: Todo? = null
 
+    init {
+        viewModelScope.launch {
+            todoRepository.observeTodos()
+                .collect { todos ->
+                    _todos.value = todos
+                }
+        }
+    }
+
     fun addTodo(text: String) {
         viewModelScope.launch {
             val todo = Todo(title = text)
             todoRepository.addTodo(todo)
         }
+//        Log.d("reponse!!", text)
     }
 
     fun toggle(uid: Int) {
