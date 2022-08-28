@@ -7,3 +7,4 @@
 6. Sensor (SensorManager, Canvas, AndroidViewModel)
 7. xylophone (SoundPool, AndroidViewModel)
 8. MapGPS (GoogleMap, LocationCallBack, PolylineOptions, LifecycleEventObserver)
+9. TodoList (Room, ViewModelFactory, LazyColumn, snackbar, scaffoldState)
