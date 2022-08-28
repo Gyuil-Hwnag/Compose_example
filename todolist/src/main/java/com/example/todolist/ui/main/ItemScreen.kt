@@ -35,13 +35,15 @@ fun TodoItem(
         )
 
         Column(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .weight(1f)
+                .clickable { onClick(todo) }
         ) {
             Text(
                 text = format.format(Date(todo.date)),
                 color = if(todo.isDone) Color.Gray else Color.Black,
                 style = TextStyle(
-                    textDecoration =  if(todo.isDone) TextDecoration.LineThrough else TextDecoration.None
+                    textDecoration = if(todo.isDone) TextDecoration.LineThrough else TextDecoration.None
                 )
             )
 
@@ -49,7 +51,7 @@ fun TodoItem(
                 text = todo.title,
                 color = if(todo.isDone) Color.Gray else Color.Black,
                 style = TextStyle(
-                    textDecoration =  if(todo.isDone) TextDecoration.LineThrough else TextDecoration.None
+                    textDecoration = if(todo.isDone) TextDecoration.LineThrough else TextDecoration.None
                 )
             )
 
