@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todolist.domain.model.Todo
 import com.example.todolist.domain.repository.TodoRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -22,10 +23,9 @@ class MainViewModel(
 
     init {
         viewModelScope.launch {
-            todoRepository.observeTodos()
-                .collect { todos ->
+            todoRepository.observeTodos().collect { todos ->
                     _todos.value = todos
-                }
+            }
         }
     }
 
@@ -34,7 +34,6 @@ class MainViewModel(
             val todo = Todo(title = text)
             todoRepository.addTodo(todo)
         }
-//        Log.d("reponse!!", text)
     }
 
     fun toggle(uid: Int) {
