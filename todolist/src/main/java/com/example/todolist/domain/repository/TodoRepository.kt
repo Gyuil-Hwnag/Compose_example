@@ -4,6 +4,7 @@ import com.example.todolist.domain.model.Todo
 import kotlinx.coroutines.flow.Flow
 
 interface TodoRepository {
+    fun getTodos(): List<Todo>
 
     fun observeTodos(): Flow<List<Todo>>
 

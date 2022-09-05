@@ -14,6 +14,10 @@ class TodoRepositoryImpl(application: Application) : TodoRepository {
         "Todo-DB"
     ).build()
 
+    override fun getTodos(): List<Todo> {
+        return db.todoDao().getTodo()
+    }
+
     override fun observeTodos(): Flow<List<Todo>> {
         return db.todoDao().todos()
     }

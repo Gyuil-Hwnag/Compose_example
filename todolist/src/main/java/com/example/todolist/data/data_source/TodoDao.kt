@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 interface TodoDao {
 
     @Query("SELECT * FROM todo ORDER BY date DESC")
+    fun getTodo(): List<Todo>
+
+    @Query("SELECT * FROM todo ORDER BY date DESC")
     fun todos(): Flow<List<Todo>>
 
     // uid 통일시 덮어쓰기(Insert로 update까지)

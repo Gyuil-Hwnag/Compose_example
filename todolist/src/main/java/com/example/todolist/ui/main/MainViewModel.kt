@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todolist.domain.model.Todo
 import com.example.todolist.domain.repository.TodoRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -21,11 +22,36 @@ class MainViewModel(
 
     private var recentlyDeleteTodo: Todo? = null
 
+    // 1. CoroutineScope와 viewModelScope의 차이점 찾아보려고 작성
+//    private val jobTodo = CoroutineScope(Dispatchers.IO).launch {
+//        todoRepository.observeTodos().collect { todos ->
+//            _todos.value = todos
+//        }
+//    }
+
     init {
         viewModelScope.launch {
             todoRepository.observeTodos().collect { todos ->
                     _todos.value = todos
             }
+        }
+
+        // 2. CoroutineScope와 viewModelScope의 차이점 찾아보려고 작성
+//        jobTodo.start()
+    }
+
+    // 3. CoroutineScope와 viewModelScope의 차이점 찾아보려고 작성
+//    override fun onCleared() {
+//        super.onCleared()
+//        jobTodo.cancel()
+//    }
+
+    private val _getTodos = mutableStateOf(emptyList<Todo>())
+    val gettodos: State<List<Todo>> = _getTodos
+
+    fun getTodos() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _getTodos.value = todoRepository.getTodos()
         }
     }
 
